@@ -1,5 +1,6 @@
 import express from 'express';
 import { createServer } from 'http';
+import { HasRole } from './middleware/HasRole';
 import { isAuthencicated } from './middleware/IsAuthenticated';
 import { authController } from './useCases/auth';
 import { createUserController } from './useCases/createUser';
@@ -10,7 +11,7 @@ const app = express();
 app.use(express.json());
 const server = createServer(app);
 
-app.get('/users', isAuthencicated, (req, res) => {
+app.get('/users', isAuthencicated, HasRole, (req, res) => {
   return listUserController.handle(req, res);
 });
 app.post('/users', (req, res) => {
