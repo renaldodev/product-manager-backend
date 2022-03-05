@@ -5,6 +5,7 @@ import { createUserController } from './../useCases/createUser';
 import { deleteUserController } from './../useCases/deleteUser';
 import { listUserController } from './../useCases/listUser';
 import { Router } from 'express';
+import { createCategoryController } from '../useCases/createCategory';
 
 const route = Router();
 
@@ -21,6 +22,10 @@ route.delete('/users/:id', (req, res) => {
 
 route.post('/auth/login', async (req, res) => {
   return await authController.handle(req, res);
+});
+
+route.post('/category', async (req, res) => {
+  return await createCategoryController.handle(req, res);
 });
 
 export { route };
