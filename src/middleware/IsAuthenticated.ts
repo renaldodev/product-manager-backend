@@ -2,7 +2,7 @@ import { NextFunction, Request, Response } from 'express';
 import { verify } from 'jsonwebtoken';
 import { ROLE } from '../utils/userRole';
 
-export function isAuthencicated(
+export function isAuthenticated(
   request: Request,
   response: Response,
   next: NextFunction,

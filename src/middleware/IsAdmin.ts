@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
 import { ROLE } from '../utils/userRole';
 
-export function HasRole(
+export function isAdmin(
   request: Request,
   response: Response,
   next: NextFunction,

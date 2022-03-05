@@ -1,5 +1,5 @@
-import { HasRole } from './../middleware/HasRole';
-import { isAuthencicated } from './../middleware/IsAuthenticated';
+import { isAdmin } from '../middleware/IsAdmin';
+import { isAuthenticated } from './../middleware/IsAuthenticated';
 import { authController } from './../useCases/auth';
 import { createUserController } from './../useCases/createUser';
 import { deleteUserController } from './../useCases/deleteUser';
@@ -8,7 +8,7 @@ import { Router } from 'express';
 
 const route = Router();
 
-route.get('/users', isAuthencicated, HasRole, (req, res) => {
+route.get('/users', isAuthenticated, isAdmin, (req, res) => {
   return listUserController.handle(req, res);
 });
 route.post('/users', (req, res) => {
