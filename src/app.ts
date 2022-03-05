@@ -1,29 +1,12 @@
 import express from 'express';
 import { createServer } from 'http';
-import { HasRole } from './middleware/HasRole';
-import { isAuthencicated } from './middleware/IsAuthenticated';
-import { authController } from './useCases/auth';
-import { createUserController } from './useCases/createUser';
-import { deleteUserController } from './useCases/deleteUser';
-import { listUserController } from './useCases/listUser';
+import cors from 'cors';
 
+import { route as routeUser } from './routes/route';
 const app = express();
 app.use(express.json());
+app.use(cors());
 const server = createServer(app);
 
-app.get('/users', isAuthencicated, HasRole, (req, res) => {
-  return listUserController.handle(req, res);
-});
-app.post('/users', (req, res) => {
-  return createUserController.handle(req, res);
-});
-
-app.delete('/users/:id', (req, res) => {
-  return deleteUserController.handle(req, res);
-});
-
-app.post('/auth/login', async (req, res) => {
-  return await authController.handle(req, res);
-});
-
+app.use(routeUser);
 export { server, app };
