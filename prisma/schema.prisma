@@ -11,16 +11,33 @@ datasource db {
 }
 
 model User {
-  id       String @id
+  id       String    @id
   name     String
   role     Int
   email    String
   password String
+  Product  Product[]
 }
 
 model Category {
-  id          String @id
+  id          String    @id
   name        String
   description String
   image       String
+  Product     Product[]
+}
+
+model Product {
+  id          String   @id
+  name        String
+  price       Int
+  description String
+  image       String
+  category    Category @relation(fields: [categoryId], references: [id])
+  use         User     @relation(fields: [userId], references: [id])
+  createdAt   DateTime
+  updatedAt   DateTime
+
+  categoryId String
+  userId     String
 }
