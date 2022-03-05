@@ -6,6 +6,7 @@ import { deleteUserController } from './../useCases/deleteUser';
 import { listUserController } from './../useCases/listUser';
 import { Router } from 'express';
 import { createCategoryController } from '../useCases/createCategory';
+import { listCategoryController } from '../useCases/listCategory';
 
 const route = Router();
 
@@ -26,6 +27,10 @@ route.post('/auth/login', async (req, res) => {
 
 route.post('/category', async (req, res) => {
   return await createCategoryController.handle(req, res);
+});
+
+route.get('/category', async (req, res) => {
+  return await listCategoryController.handle(req, res);
 });
 
 export { route };
