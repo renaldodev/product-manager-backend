@@ -11,9 +11,16 @@ datasource db {
 }
 
 model User {
-  id          String @id 
+  id       String @id
+  name     String
+  role     Int
+  email    String
+  password String
+}
+
+model Category {
+  id          String @id
   name        String
-  role        Int
-  email       String
-  password    String
+  description String
+  image       String
 }
