@@ -1,9 +1,9 @@
 import * as https from 'https';
 import * as querystring from 'query-string';
 
-import { IUploadOptions, IUploadProvider } from '../IUploadProvider';
+import { IUploadOptions, IUploadImageProvider } from '../IUploadImageProvider';
 
-export class ImgbbUploadProvider implements IUploadProvider {
+export class ImgbbUploadProvider implements IUploadImageProvider {
   async upload(optionsUpload: IUploadOptions) {
     return new Promise((resolve, reject) => {
       const {

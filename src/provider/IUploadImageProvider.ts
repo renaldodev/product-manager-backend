@@ -5,6 +5,6 @@ export interface IUploadOptions {
   expiration?: number;
 }
 
-export interface IUploadProvider {
+export interface IUploadImageProvider {
   upload(options: IUploadOptions): Promise<any>;
 }

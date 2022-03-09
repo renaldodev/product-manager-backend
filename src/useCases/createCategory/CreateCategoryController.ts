@@ -1,11 +1,11 @@
 import { Request, Response } from 'express';
-import { IUploadProvider } from '../../provider/IUploadProvider';
+import { IUploadImageProvider } from '../../provider/IUploadImageProvider';
 import { imageBufferToString64 } from '../../utils/imageToString';
 import { CreateCategoryCase } from './CreateCategoryCase';
 export class CreateCategoryController {
   constructor(
     private createCatecoryCase: CreateCategoryCase,
-    private uploadProvider: IUploadProvider,
+    private uploadProvider: IUploadImageProvider,
   ) {}
   async handle(request: Request, response: Response): Promise<Response> {
     const { name, description } = request.body;
