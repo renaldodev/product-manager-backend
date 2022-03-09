@@ -8,5 +8,6 @@ declare module 'express' {
       email: string;
       role: ROLE;
     };
+    files?: any;
   }
 }

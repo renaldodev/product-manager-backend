@@ -1,12 +1,31 @@
 import { Request, Response } from 'express';
+import { IUploadProvider } from '../../provider/IUploadProvider';
+import { imageBufferToString64 } from '../../utils/imageToString';
 import { CreateCategoryCase } from './CreateCategoryCase';
-
 export class CreateCategoryController {
-  constructor(private createCatecoryCase: CreateCategoryCase) {}
+  constructor(
+    private createCatecoryCase: CreateCategoryCase,
+    private uploadProvider: IUploadProvider,
+  ) {}
   async handle(request: Request, response: Response): Promise<Response> {
-    const { name, description, image } = request.body;
+    const { name, description } = request.body;
+
     try {
-      await this.createCatecoryCase.execute({ name, description, image });
+      const url = await this.uploadProvider
+        .upload({
+          apiKey: process.env.IMGBB_API_KEY,
+          image: imageBufferToString64(request.files.image.data),
+        })
+        .then((r) => r.url)
+        .catch((error) => {
+          throw new Error('Error to deploy image to imgbb');
+        });
+
+      await this.createCatecoryCase.execute({
+        name,
+        description,
+        image: url,
+      });
       return response.status(201).send();
     } catch (error: any) {
       return response

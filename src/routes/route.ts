@@ -1,15 +1,15 @@
+import { Router } from 'express';
+
 import { isAdmin } from '../middleware/IsAdmin';
 import { isAuthenticated } from './../middleware/IsAuthenticated';
 import { authController } from './../useCases/auth';
 import { createUserController } from './../useCases/createUser';
 import { deleteUserController } from './../useCases/deleteUser';
 import { listUserController } from './../useCases/listUser';
-import { Router } from 'express';
 import { createCategoryController } from '../useCases/createCategory';
 import { listCategoryController } from '../useCases/listCategory';
 
 const route = Router();
-
 route.get('/users', isAuthenticated, isAdmin, (req, res) => {
   return listUserController.handle(req, res);
 });
